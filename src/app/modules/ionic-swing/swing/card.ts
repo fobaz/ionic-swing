@@ -532,10 +532,14 @@ const Card = (stack, targetElement, prepend) => {
      * @returns {undefined}
      */
     card.destroy = () => {
+        isDraging = false; //fixes a motherfcking infinite loop that eats up all cpu after manually destroying 50+ cards. spent 3 goddamn days to find it
         mc.destroy();
         springThrowIn.destroy();
         springThrowOut.destroy();
-
+        springSystem = null;
+        eventEmitter = null;
+        springThrowIn = null;
+        springThrowOut = null;
         stack.destroyCard(card);
     };
 
